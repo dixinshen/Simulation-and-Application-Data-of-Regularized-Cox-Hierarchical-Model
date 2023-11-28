@@ -7,7 +7,7 @@
 devtools::install_github("USCbiostats/xrnet", ref = "development")
 ```
 
-1.  OS-specific prerequisites
+(1).  OS-specific prerequisites
     -   *Windows*: Install
         [RTools](https://cran.r-project.org/bin/windows/Rtools/) (not an
         R package)
