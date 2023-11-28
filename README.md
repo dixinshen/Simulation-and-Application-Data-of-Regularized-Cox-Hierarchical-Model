@@ -29,5 +29,5 @@ Data used in section 4.2 of the paper is in the folder, *anti-PD1 Data*.
 
 ## 4.  C++ Implementation of Regularized Cox’s Hierarchical Model
 
-The C++ implement of Regularized Cox's Hierarchical Model imported by Rcpp, are in the folder, *xrnet cox C++ implementation*.
+The C++ implement of Regularized Cox's Hierarchical Model, which can be imported to R by Rcpp, are in the folder, *xrnet cox C++ implementation*.
 
