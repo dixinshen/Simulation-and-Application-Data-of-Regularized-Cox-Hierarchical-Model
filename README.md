@@ -2,12 +2,7 @@
 
 ## 1.  To implement the algorithm described in the paper, install **xrnet** package with survival module
 
-``` r
-# Survival module only available under Development branch
-devtools::install_github("USCbiostats/xrnet", ref = "development")
-```
-
-(1).  OS-specific prerequisites
+1.  OS-specific prerequisites
     -   *Windows*: Install
         [RTools](https://cran.r-project.org/bin/windows/Rtools/) (not an
         R package)
@@ -15,6 +10,15 @@ devtools::install_github("USCbiostats/xrnet", ref = "development")
         version is &gt;= 12.2. If you have an older version, go
         [here](https://cran.r-project.org/bin/macosx/tools/) to install
         the required version
+2.  Install the **xrnet** package with the *install\_github()* function
+    (optionally install potentially unstable development branch)
+
+<!-- end list -->
+
+``` r
+# Survival module only available under Development branch
+devtools::install_github("USCbiostats/xrnet", ref = "development")
+```
 
 ## 2.  Simulation data generated in the paper, section 3 
 
