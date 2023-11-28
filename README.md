@@ -11,8 +11,7 @@
         [here](https://cran.r-project.org/bin/macosx/tools/) to install
         the required version
 2.  Install the **xrnet** package with the *install\_github()* function
-    (optionally install potentially unstable development branch)
-
+    
 <!-- end list -->
 
 ``` r
