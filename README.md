@@ -7,12 +7,12 @@
 devtools::install_github("USCbiostats/xrnet", ref = "development")
 ```
 
-    OS-specific prerequisites
+OS-specific prerequisites
     -   *Windows*: Install
         [RTools](https://cran.r-project.org/bin/windows/Rtools/) (not an
         R package)
     -   *Mac*: If using R version &gt;= 4.3.0, verify your GNU Fortran
-        version is &gt;= 6.1. If you have an older version, go
+        version is &gt;= 12.2. If you have an older version, go
         [here](https://cran.r-project.org/bin/macosx/tools/) to install
         the required version
 
