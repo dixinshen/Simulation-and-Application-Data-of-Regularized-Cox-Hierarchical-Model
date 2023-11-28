@@ -27,7 +27,7 @@ The simulation data are generated, and analyzed using the function **simCoxExt()
 
 Data used in section 4.2 of the paper is in the folder, *anti-PD1 Data*.
 
-## 4.  C++ Implement of Regularized Cox’s Hierarchical Model
+## 4.  C++ Implementation of Regularized Cox’s Hierarchical Model
 
 The C++ implement of Regularized Cox's Hierarchical Model imported by Rcpp, are in the folder, *xrnet cox C++ implementation*.
 
