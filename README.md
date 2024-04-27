@@ -21,7 +21,7 @@ devtools::install_github("USCbiostats/xrnet", ref = "development")
 
 ## 2.  Simulation data generated in the paper, section 3 
 
-The simulation data are generated, and analyzed using the function **simCoxExt()** in the script, *fast_regularized_cox.R*. The simulation results in section 3 of the paper can be reproduced with the script, *sim_Cox_V2.R*.
+The simulation data are generated, and analyzed using the function **simCoxExt()** in the script, *simulation_function.R*. The simulation results in section 3 of the paper can be reproduced with the script, *sim_xrnetcox.R*.
 
 ## 3.  Application in the paper, section 4.2, Anti-PD1 Immunotherapy Predictive Biomarker for Melanoma Survival
 
