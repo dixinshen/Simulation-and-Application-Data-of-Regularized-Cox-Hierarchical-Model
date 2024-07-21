@@ -59,6 +59,19 @@ cidx12 <- ggplot(data = dat_plot, mapping = aes(x = signal, y = cindex, fill = M
     ylab("Test C-index")
 cidx12 <- cidx12 + ggtitle("Experiment 1") + ThemeMain; cidx12
 
+a <- data.frame(acc = base$acc, signal = 2)
+b <- data.frame(acc = medext$acc, signal = 1)
+c <- data.frame(acc = lowext$acc, signal = 0.1)
+d <- data.frame(acc = zeroext$acc, signal = 0)
+dat_plot <- rbind(a,b,c,d)
+dat_plot$signal <- as.factor(dat_plot$signal)
+acc1 <- ggplot(data = dat_plot, mapping = aes(x=signal, y=acc, fill=signal), position = "dodge") +
+    geom_boxplot(width = 0.5) + 
+    scale_fill_manual(values = c("gray100", "gray70", "gray40", "gray10")) +
+    xlab("Meta-feature signal-noise ratio, SNR") +
+    ylab("Accuracy") + 
+    ggtitle("Meta-feature selection") + ThemeMain; acc1
+
 a <- data.frame(tpr = base$tpr, signal = 2)
 b <- data.frame(tpr = medext$tpr, signal = 1)
 c <- data.frame(tpr = lowext$tpr, signal = 0.1)
@@ -122,22 +135,25 @@ cidx22 <- cidx22 + ggtitle("Experiment 2") + ThemeMain; cidx22
 #########################################################################################################################
 # 3: large feature size vs. small, ridge-lasso, high signal
 set.seed(2024)
-mP <- simCoxExt(N = 100, p = 500, q = 50, true_cindex = 0.8, snr_z = 2, nSim = 100)
-lP <- simCoxExt(N = 100, p = 1000, q = 50, true_cindex = 0.8, snr_z = 2, nSim = 100)
+mP <- simCoxExt(N = 100, p = 1000, q = 50, true_cindex = 0.8, snr_z = 2, nSim = 100)
+start <- Sys.time()
+lP <- simCoxExt(N = 100, p = 10000, q = 50, true_cindex = 0.8, snr_z = 2, nSim = 100)
+end <- Sys.time()
+end - start
 a <- data.frame(cindex = base$cidx_test_r_l, feature.size="200", Method="Ridge_Lasso")
 b <- data.frame(cindex = base$cidx_test_l_l, feature.size="200", Method="Lasso_Lasso")
 c <- data.frame(cindex = base$cidx_test_ridge, feature.size="200", Method="Ridge")
 d <- data.frame(cindex = base$cidx_test_lasso, feature.size="200", Method="Lasso")
-e <- data.frame(cindex = mP$cidx_test_r_l, feature.size="500", Method="Ridge_Lasso")
-f <- data.frame(cindex = mP$cidx_test_l_l, feature.size="500", Method="Lasso_Lasso")
-g <- data.frame(cindex = mP$cidx_test_ridge, feature.size="500", Method="Ridge")
-h <- data.frame(cindex = mP$cidx_test_lasso, feature.size="500", Method="Lasso")
-i <- data.frame(cindex = lP$cidx_test_r_l, feature.size="1000", Method="Ridge_Lasso")
-j <- data.frame(cindex = lP$cidx_test_l_l, feature.size="1000", Method="Lasso_Lasso")
-k <- data.frame(cindex = lP$cidx_test_ridge, feature.size="1000", Method="Ridge")
-l <- data.frame(cindex = lP$cidx_test_lasso, feature.size="1000", Method="Lasso")
+e <- data.frame(cindex = mP$cidx_test_r_l, feature.size="1000", Method="Ridge_Lasso")
+f <- data.frame(cindex = mP$cidx_test_l_l, feature.size="1000", Method="Lasso_Lasso")
+g <- data.frame(cindex = mP$cidx_test_ridge, feature.size="1000", Method="Ridge")
+h <- data.frame(cindex = mP$cidx_test_lasso, feature.size="1000", Method="Lasso")
+i <- data.frame(cindex = lP$cidx_test_r_l, feature.size="10000", Method="Ridge_Lasso")
+j <- data.frame(cindex = lP$cidx_test_l_l, feature.size="10000", Method="Lasso_Lasso")
+k <- data.frame(cindex = lP$cidx_test_ridge, feature.size="10000", Method="Ridge")
+l <- data.frame(cindex = lP$cidx_test_lasso, feature.size="10000", Method="Lasso")
 dat_plot <- rbind(a,b,c,d,e,f,g,h,i,j,k,l)
-dat_plot$feature.size <- factor(dat_plot$feature.size, levels = c("200","500","1000"))
+dat_plot$feature.size <- factor(dat_plot$feature.size, levels = c("200","1000","10000"))
 cidx31 <- ggplot(data = dat_plot[!dat_plot$Method%in%c("Lasso","Lasso_Lasso"),], 
                  mapping = aes(x = feature.size, y = cindex, fill = Method), 
                  position = "dodge") +
@@ -188,18 +204,19 @@ cidx42 <- ggplot(data = dat_plot, mapping = aes(x = external.size, y = cindex, f
     geom_boxplot(width = 0.5) + 
     geom_hline(aes(yintercept = 0.8), linetype = "dashed") +
     scale_fill_manual(values = c("gray10", "gray70", "gray40", "gray100")) +
-    xlab("Meta-feature size, p") +
+    xlab("Meta-feature size, q") +
     ylab("Test C-index")
 cidx42 <- cidx42 + ggtitle("Experiment 4") + ThemeMain; cidx42
 #########################################################################################################################
 
 #########################################################################################################################
-save(cidx11, cidx12, cidx21, cidx22, cidx31, cidx32, cidx41, cidx42, tpr1, fpr1,
-     file = "simCox_plot.RData")
-save(zeroext, base, medext, lowext, mSample, lSample, mP, lP, sQ, lQ,
-     file = "simCox.RData")
+# save(cidx11, cidx12, cidx21, cidx22, cidx31, cidx32, cidx41, cidx42, acc1, tpr1, fpr1,
+#      file = "simCox_plot.RData")
+# save(zeroext, base, medext, lowext, mSample, lSample, mP, lP, sQ, lQ,
+#      file = "simCox.RData")
 
 load("simCox_plot.RData")
+load("simCox.Rdata")
 
 g_legend<-function(a.gplot){
     tmp <- ggplot_gtable(ggplot_build(a.gplot))
@@ -221,7 +238,7 @@ ggsave("sim1.pdf", units="mm", width=300, height=200, dpi=300)
 tpr1 = tpr1 + theme(legend.position="none")
 fpr1 = fpr1 + theme(legend.position="none")
 
-sim2 <- ggarrange(tpr1, fpr1, nrow=1, ncol=2, common.legend=T, legend="bottom")
+sim2 <- ggarrange(acc1, tpr1, fpr1, nrow=1, ncol=3, common.legend=T, legend="bottom")
 ggsave("sim2.pdf", units="mm", width=300, height=130, dpi=300)
 
 sim3 <- ggarrange(cidx12,cidx22,cidx32,cidx42, 

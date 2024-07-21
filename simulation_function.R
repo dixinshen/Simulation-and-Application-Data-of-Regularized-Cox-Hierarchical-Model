@@ -48,7 +48,7 @@ simCoxExt <- function(N, p, q, true_cindex, snr_z, nSim, corr_x = 0.5, cov_x = "
         diag(block) <- 1
         sigma <- as.matrix(bdiag(replicate(q, block, simplify=F)))
     }
-    x <- mvrnorm((1e4+N), rep(0, p), sigma)
+    x <- mvnfast::rmvn((1e4+N), rep(0, p), sigma)
     
     # fix true c index
     for (stdev in seq(0.01, 10, 0.01)) {
@@ -84,7 +84,7 @@ simCoxExt <- function(N, p, q, true_cindex, snr_z, nSim, corr_x = 0.5, cov_x = "
     alphas_l_l <- mat.or.vec(nSim, q)
     for (j in 1:nSim) {
         # xrnet
-        x <- mvrnorm(N, rep(0, p), sigma)
+        x <- mvnfast::rmvn(N, rep(0, p), sigma)
         t <- scale * (-log(runif(N)) * exp(-drop(x%*%b)))^(1/shape) + rnorm(N, sd = stdev)
         t[t<=0] <- min(t[t>0])
         t[t>20] <- 20    # follow up time is 20
