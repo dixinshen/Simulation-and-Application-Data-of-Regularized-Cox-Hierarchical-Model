@@ -15,8 +15,8 @@
 <!-- end list -->
 
 ``` r
-# Survival module only available under Development branch
-devtools::install_github("USCbiostats/xrnet", ref = "development")
+# Survival module available at
+devtools::install_github("dixinshen/xrnet_surv", ref = "xrnet_cox")
 ```
 
 ## 2.  Simulation data generated in the paper, section 3 
